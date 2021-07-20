@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PokemonList</string>
+    <string name="imageView">imageView</string>
+</resources>
