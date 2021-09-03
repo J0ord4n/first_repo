@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".PokemonInfo.DetailActivity">
 
+
+
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
@@ -22,20 +24,20 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
-        android:background="@android:color/holo_purple"
+        android:background="@android:color/white"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/typeText"
         tools:srcCompat="@tools:sample/avatars"
         android:contentDescription="@string/imageView" />
 
     <TextView
-        android:id="@+id/statsText"
+        android:id="@+id/statText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -46,16 +48,38 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:text="Statistiche" />
 
+
     <TextView
         android:id="@+id/typeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:textColor="@android:color/black"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statsText"
-        tools:text="Tipologia"/>
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+        tools:ignore="UnknownId"
+        tools:text="Tipologia" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ProgressBar
+        android:id="@+id/prIndicatorDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
