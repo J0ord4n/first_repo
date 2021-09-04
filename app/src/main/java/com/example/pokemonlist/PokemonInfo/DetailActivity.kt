@@ -30,7 +30,7 @@ class DetailActivity : AppCompatActivity() {
     private fun initUI() {
         prIndicatorDetail.visibility = View.VISIBLE
 
-        val id = intent.extras?.get("id") as Int
+        val id = intent.extras?.get("id") as String
 
         viewModel.getPokemonInfo(id)
 

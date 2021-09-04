@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         poke_recyclerview.layoutManager = GridLayoutManager(this, 2)
         poke_recyclerview.adapter = PokemonAdapter {
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("id", it)
+            intent.putExtra("id", it.name)
             startActivity(intent)
         }
 

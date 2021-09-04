@@ -24,7 +24,7 @@ class PokemonInfoViewModel() : ViewModel() {
     val statDetail = MutableLiveData<StatDetail>()
 
 
-    fun getPokemonInfo(id: Int) {
+    fun getPokemonInfo(id: String) {
         val call = service.getPokemonInfo(id)
 
         call.enqueue(object : Callback<Pokemon> {

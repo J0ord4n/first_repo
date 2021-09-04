@@ -3,6 +3,7 @@ package com.example.pokemonlist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
@@ -13,7 +14,7 @@ import com.example.pokemonlist.model.PokemonResult
 import kotlinx.android.synthetic.main.row_pokemon.view.*
 
 
-class PokemonAdapter(val pokemonClick: (Int) -> Unit) :
+class PokemonAdapter(val pokemonClick: (PokemonResult) -> Unit) :
     RecyclerView.Adapter<PokemonAdapter.PokeViewHolder>(), Filterable {
 
 
@@ -42,21 +43,23 @@ class PokemonAdapter(val pokemonClick: (Int) -> Unit) :
 
     override fun onBindViewHolder(holder: PokeViewHolder, position: Int) {
         val pokemon = filterPokemonList[position]
-        val animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.bounce)
         holder.itemView.itemString.text = pokemon.name.toUpperCase()
         Glide.with(holder.itemView.context)
             .load(pokemon.getImageUrl())
             .centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.itemView.pokemonImage)
-
-        holder.itemView.setOnClickListener {
-            holder.itemView.pokemonImage.startAnimation(animation)
-            pokemonClick(position + 1)
-        }
     }
 
-    class PokeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class PokeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val animation: Animation = AnimationUtils.loadAnimation(itemView.context, R.anim.bounce)
+        init {
+            itemView.setOnClickListener {
+                itemView.pokemonImage.startAnimation(animation)
+                pokemonClick.invoke(filterPokemonList[adapterPosition])
+            }
+        }
+    }
 
 
     override fun getFilter(): Filter {
