@@ -2,6 +2,7 @@ package com.example.pokemonlist.PokemonInfo
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.transition.*
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -21,10 +22,16 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
+        val explode = Explode()
+        window.enterTransition = explode
+        window.exitTransition = explode
+
         viewModel = ViewModelProvider(this).get(PokemonInfoViewModel::class.java)
 
         initUI()
     }
+
+
 
     @SuppressLint("SetTextI18n")
     private fun initUI() {
@@ -56,5 +63,6 @@ class DetailActivity : AppCompatActivity() {
         })
 
     }
+
 
 }

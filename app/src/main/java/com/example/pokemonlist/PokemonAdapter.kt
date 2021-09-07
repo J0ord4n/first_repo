@@ -17,17 +17,14 @@ import kotlinx.android.synthetic.main.row_pokemon.view.*
 class PokemonAdapter(val pokemonClick: (PokemonResult) -> Unit) :
     RecyclerView.Adapter<PokemonAdapter.PokeViewHolder>(), Filterable {
 
-
     private var pokemonList: ArrayList<PokemonResult> = ArrayList()
     private var filterPokemonList: ArrayList<PokemonResult> = ArrayList()
-
 
     fun setData(list: List<PokemonResult>) {
         pokemonList = list as ArrayList<PokemonResult>
         filterPokemonList = pokemonList
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokeViewHolder {
         return PokeViewHolder(
@@ -40,7 +37,6 @@ class PokemonAdapter(val pokemonClick: (PokemonResult) -> Unit) :
         return filterPokemonList.size
     }
 
-
     override fun onBindViewHolder(holder: PokeViewHolder, position: Int) {
         val pokemon = filterPokemonList[position]
         holder.itemView.itemString.text = pokemon.name.toUpperCase()
@@ -52,7 +48,9 @@ class PokemonAdapter(val pokemonClick: (PokemonResult) -> Unit) :
     }
 
     inner class PokeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val animation: Animation = AnimationUtils.loadAnimation(itemView.context, R.anim.bounce)
+        private val animation: Animation =
+            AnimationUtils.loadAnimation(itemView.context, R.anim.bounce)
+
         init {
             itemView.setOnClickListener {
                 itemView.pokemonImage.startAnimation(animation)
@@ -60,7 +58,6 @@ class PokemonAdapter(val pokemonClick: (PokemonResult) -> Unit) :
             }
         }
     }
-
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -84,9 +81,7 @@ class PokemonAdapter(val pokemonClick: (PokemonResult) -> Unit) :
                 else
                     results.values as ArrayList<PokemonResult>
                 notifyDataSetChanged()
-
             }
-
         }
     }
 }
