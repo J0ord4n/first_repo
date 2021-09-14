@@ -3,21 +3,19 @@ package com.example.pokemonlist
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.transition.*
+import android.transition.Explode
 import android.view.Menu
 import android.view.View
-import android.view.ViewGroup
-import android.view.animation.AnticipateOvershootInterpolator
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.view.ViewCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokemonlist.PokemonInfo.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.row_pokemon.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+        floating_on_off.setOnClickListener { darkmodeDialog() }
+
         val explode = Explode()
         window.enterTransition = explode
         window.exitTransition = explode
@@ -35,6 +37,33 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(PokemonViewModel::class.java)
 
         initUI()
+    }
+
+    @SuppressLint("ShowToast")
+    private fun darkmodeDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("DarkMode On/Off")
+        val choose = arrayOf("Light-Mode", "Dark-Mode")
+        val checkedItem = 0
+
+        builder.setSingleChoiceItems(choose, checkedItem) { dialog, which ->
+            when (which) {
+                0 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    delegate.applyDayNight()
+                    dialog.dismiss()
+                    Toast.makeText(this, "Light-Mode On", Toast.LENGTH_LONG).show()
+                }
+                1 -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    delegate.applyDayNight()
+                    dialog.dismiss()
+                    Toast.makeText(this, "Dark-Mode On", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
 
@@ -50,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.getPokemonList()
-        viewModel.pokemonList.observe(this, Observer { list ->
+        viewModel.pokemonList.observe(this, { list ->
             (poke_recyclerview.adapter as PokemonAdapter).setData(list)
             prIndicator.visibility = View.GONE
         })
@@ -71,7 +100,6 @@ class MainActivity : AppCompatActivity() {
                 (poke_recyclerview.adapter as PokemonAdapter).filter.filter(newText)
                 return false
             }
-
         })
         return true
     }

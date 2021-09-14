@@ -13,7 +13,7 @@ data class Pokemon(
     @Expose @SerializedName("sprites") val sprites: Sprites,
     @Expose @SerializedName("stats") val stats: List<Stat>,
     @Expose @SerializedName("types") val types: List<Type>,
-    )
+)
 
 data class Sprites(
     @Expose @SerializedName("front_default") val frontDefault: String,
@@ -42,4 +42,3 @@ data class TypeX(
     val name: String,
     val url: String
 )
-

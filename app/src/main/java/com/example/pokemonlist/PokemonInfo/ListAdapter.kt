@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonlist.R
 import com.example.pokemonlist.model.Stat
 import kotlinx.android.synthetic.main.row_list.view.*
-import kotlin.math.max
+import java.util.*
 
 class ListAdapter( private val statList: List<Stat>) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
@@ -22,11 +22,11 @@ class ListAdapter( private val statList: List<Stat>) : RecyclerView.Adapter<List
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val stat = statList[position]
-        val max = statList.maxByOrNull { it ->  it.base_stat }
+        val max = statList.maxByOrNull { it.base_stat }
         val pb = holder.itemView.progressStat
         val currentProgress = stat.base_stat
         pb.max = max?.base_stat ?: 200
-        holder.itemView.itemList.text = stat.stat.name.toUpperCase()
+        holder.itemView.itemList.text = stat.stat.name.toUpperCase(Locale.ROOT)
         holder.itemView.itemNumber.text = stat.base_stat.toString()
         ObjectAnimator.ofInt(pb, "progress", currentProgress)
             .setDuration(1000)

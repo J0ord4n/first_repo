@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.pokemonlist.model.PokemonResult
 import kotlinx.android.synthetic.main.row_pokemon.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class PokemonAdapter(val pokemonClick: (PokemonResult) -> Unit) :
@@ -39,7 +41,7 @@ class PokemonAdapter(val pokemonClick: (PokemonResult) -> Unit) :
 
     override fun onBindViewHolder(holder: PokeViewHolder, position: Int) {
         val pokemon = filterPokemonList[position]
-        holder.itemView.itemString.text = pokemon.name.toUpperCase()
+        holder.itemView.itemString.text = pokemon.name.toUpperCase(Locale.ROOT)
         Glide.with(holder.itemView.context)
             .load(pokemon.getImageUrl())
             .centerCrop()
@@ -85,6 +87,7 @@ class PokemonAdapter(val pokemonClick: (PokemonResult) -> Unit) :
         }
     }
 }
+
 
 
 

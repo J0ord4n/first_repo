@@ -1,12 +1,7 @@
 package com.example.pokemonlist.model
 
-import android.os.Parcel
-import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
 
 data class PokemonApiResponse(
     @Expose @SerializedName("count") val count: Int,
@@ -24,11 +19,5 @@ data class PokemonResult(
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$index.png"
     }
 
-
 }
-
-data class StatDetail(
-    @Expose @SerializedName("name") val name: String,
-    @Expose @SerializedName("is_battle_only") val isBattleOnly: Boolean
-)
 

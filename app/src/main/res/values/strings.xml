@@ -6,4 +6,5 @@
     <string name="pokemonName">Picachu</string>
     <string name="pokeImage">ImageView</string>
     <string name="search_pokemon">search Pokemon</string>
+    <string name="floating_on_off">Floating_on_off</string>
 </resources>
