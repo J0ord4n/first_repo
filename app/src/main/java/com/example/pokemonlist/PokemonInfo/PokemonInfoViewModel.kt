@@ -16,16 +16,12 @@ class PokemonInfoViewModel : ViewModel() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-
     private val service: PokemonApiService = retrofit.create(PokemonApiService::class.java)
 
     val pokemonInfo = MutableLiveData<Pokemon>()
 
-
-
     fun getPokemonInfo(id: String) {
         val call = service.getPokemonInfo(id)
-
         call.enqueue(object : Callback<Pokemon> {
             override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
                 response.body()?.let { pokemon ->
@@ -36,9 +32,6 @@ class PokemonInfoViewModel : ViewModel() {
             override fun onFailure(call: Call<Pokemon>, t: Throwable) {
                 call.cancel()
             }
-
         })
-
     }
-
 }

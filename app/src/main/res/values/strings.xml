@@ -7,4 +7,7 @@
     <string name="pokeImage">ImageView</string>
     <string name="search_pokemon">search Pokemon</string>
     <string name="floating_on_off">Floating_on_off</string>
+    <string name="no_net_image">no_net_image</string>
+    <string name="no_internet_connection">NO INTERNET CONNECTION!</string>
+    <string name="restart_activity">Restart Activity</string>
 </resources>

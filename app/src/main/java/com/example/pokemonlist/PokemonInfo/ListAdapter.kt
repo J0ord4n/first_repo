@@ -10,15 +10,14 @@ import com.example.pokemonlist.model.Stat
 import kotlinx.android.synthetic.main.row_list.view.*
 import java.util.*
 
-class ListAdapter( private val statList: List<Stat>) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
-
+class ListAdapter(private val statList: List<Stat>) :
+    RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder =
         ListViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.row_list, parent, false)
         )
-
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val stat = statList[position]

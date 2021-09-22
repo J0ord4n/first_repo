@@ -2,7 +2,7 @@ package com.example.pokemonlist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.pokemonlist.model.PokemonApiResponse
+import com.example.pokemonlist.model.Pokemon
 import com.example.pokemonlist.model.PokemonResult
 import com.example.pokemonlist.service.PokemonApiService
 import retrofit2.Call
@@ -21,25 +21,21 @@ class PokemonViewModel : ViewModel() {
 
     val pokemonList = MutableLiveData<List<PokemonResult>>()
 
-
     fun getPokemonList() {
         val call = service.getPokemonList(100, 0)
-
-        call.enqueue(object : Callback<PokemonApiResponse> {
+        call.enqueue(object : Callback<Pokemon> {
             override fun onResponse(
-                call: Call<PokemonApiResponse>,
-                response: Response<PokemonApiResponse>
+                call: Call<Pokemon>,
+                response: Response<Pokemon>
             ) {
                 response.body()?.results?.let { list ->
                     pokemonList.postValue(list)
                 }
             }
 
-            override fun onFailure(call: Call<PokemonApiResponse>, t: Throwable) {
+            override fun onFailure(call: Call<Pokemon>, t: Throwable) {
                 call.cancel()
             }
         })
     }
-
-
 }
